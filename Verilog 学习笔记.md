@@ -141,20 +141,23 @@
 + 请注意，时钟always块生成了与另外两个不同的电路，多了一个触发器，因此输出会有一定的延迟。
 
 **22**
-
-+ `always @(*) begin
-    casez (in[3:0])
+  ```
+always @(*) begin
+      casez (in[3:0])
       4'bzzz1: out = 0;  // in[3:1]输入什么都可以
       4'bzz1z: out = 1;
       4'bz1zz: out = 2;
       4'b1zzz: out = 3;
       default: out = 0;
     endcase
-  end`
+  end
+  ```
 
-**22**
+**23**
 
 + if语句必须在过程块内使用
+
+**The End**
 
 
 
