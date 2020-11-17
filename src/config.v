@@ -19,6 +19,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 `define ZERO_WORD 32'h00000000
+`define ZeroReg 32'h00000000   //to be define
 
 `define InstLen 32
 `define AddrLen 32

@@ -18,7 +18,7 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
+`include "config.v"
 
 module id(
     input wire rst,
@@ -62,7 +62,7 @@ always @(*) begin
     rd_enable = `WriteDisable;
     reg1_read_enable = `ReadDisable;
     reg2_read_enable = `ReadDisable;
-    rd = `ZeroReg; 
+    rd = `ZeroReg ;
     aluop = `NOP;
     alusel = `NOP_SEL;
     useImmInstead = 1'b0;
