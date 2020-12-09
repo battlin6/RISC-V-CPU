@@ -7,3 +7,5 @@
 11.23 Start to open books.
 
 12.5 Read almost all.
+
+12.10 Begin to write.
