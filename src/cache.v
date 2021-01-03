@@ -2,7 +2,6 @@
 `define CacheSizeLen    8
 `define CacheSize       256
 `define CacheBus        255 : 0
-`define TagLen          5
 `define TagBus          4 : 0
 `define AddrEntryBus    9 : 2
 `define AddrTagBus      14 : 10

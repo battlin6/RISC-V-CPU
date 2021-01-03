@@ -13,15 +13,13 @@ module id(
     input wire[`RegBus]         rdata1,
     input wire[`RegBus]         rdata2,
 
-// Forwarding from ex 
     input   wire                ex_we,
     input   wire[`RegAddrBus]   ex_waddr,
     input   wire[`RegBus]       ex_wdata,
-
-//  Forwarding from mem
     input   wire                mem_we,
     input   wire[`RegAddrBus]   mem_waddr,
     input   wire[`RegBus]       mem_wdata,
+
 // To Reg
     output reg                  re1,
     output reg                  re2,
@@ -310,6 +308,8 @@ always @ (*) begin
     end
 end
 
+
+    //Data Forwarding
 always @ (*) begin
     if (rst == 1) begin
         reg1 = 0;

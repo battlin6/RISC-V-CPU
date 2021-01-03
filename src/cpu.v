@@ -232,7 +232,7 @@ mem_wb mem_wb0(
     .stall(stall)
 );
 
-stall_ctrl ctrl0(
+stall_ctrl stall_ctrl0(
     .clk(clk_in), .rst(rst_in), .rdy(rdy_in),
     .if_stall_req(if_stall_req), .mem_stall_req(mem_stall_req),
     .stall(stall),

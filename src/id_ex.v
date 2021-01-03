@@ -75,4 +75,4 @@ always @(posedge clk) begin
     end
 end
 
-endmodule // id_ex
+endmodule
