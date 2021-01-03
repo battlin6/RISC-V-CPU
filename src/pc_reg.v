@@ -1,43 +1,58 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Engineer: Gabriel
-// 
-// Create Date: 10/24/2019 11:39:52 PM
-// Design Name: 
-// Module Name: pc_reg
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
+`include "defines.v"
 
 module pc_reg(
-    input wire clk,
-    input wire rst,
-    output reg [`AddrLen - 1 : 0] pc,
-    output reg chip_enable);
+    input   wire    clk,
+    input   wire    rst,
+    input   wire    stall,
+    input   wire    rdy,
+    output  reg[`InstAddrBus]   pc,
+    output  reg[`InstAddrBus]   npc,
+    output  reg                 pc_e,
+
+//  Prediction
+    input   wire[`InstAddrBus]  jmp_target,
+    input   wire                jmp_e,
+    input   wire[`InstAddrBus]  pred,
+    input   wire                pred_e
+);
+
+reg pc_done;
 
 always @ (posedge clk) begin
-    if (rst == `ResetEnable)
-        chip_enable <= `ChipDisable;
-    else
-        chip_enable <= `ChipEnable;
-end
-
-always @ (posedge clk) begin
-    if (chip_enable == `ChipDisable) begin
-        pc <= `ZERO_WORD;
-    end
-    else begin
-        pc <= pc + 4'h4;
+    if (rst) begin
+        npc <= 0;
+        pc <= 0;
+        pc_done <= 0;
+        pc_e <= 1;
+    end else if (rdy) begin
+        if (jmp_e == 1) begin
+            if (stall == 0) begin
+                pc <= jmp_target;
+                npc <= jmp_target + 4;
+                pc_e <= 1;
+            end else begin
+                pc_done <= 1;
+                pc_e <= 0;
+                npc <= jmp_target;
+            end
+        end
+        else if (pred_e == 1 && pc_done == 0) begin
+            if (stall == 0) begin
+                pc <= pred;
+                npc <= pred + 4;
+                pc_e <= 1;
+            end else begin
+                pc_e <= 0;
+                npc <= pred;
+            end
+        end else if (stall == 0) begin
+            pc <= npc;
+            npc <= npc + 4;
+            pc_done <= 0;
+            pc_e <= 1;
+        end else begin
+            pc_e <= 0;
+        end
     end
 end
 

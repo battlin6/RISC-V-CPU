@@ -1,47 +1,31 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 10/29/2019 12:03:13 AM
-// Design Name: 
-// Module Name: mem_wb
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
+`include "defines.v"
 
 module mem_wb(
-    input clk,
-    input rst,
-    input wire [`RegLen - 1 : 0] mem_rd_data,
-    input wire [`RegAddrLen - 1 : 0] mem_rd_addr,
-    input wire mem_rd_enable,
+    input   wire    clk,
+    input   wire    rst,
+    input   wire    rdy,
+    
+    input   wire[`RegBus]       mem_rd_data,
+    input   wire[`RegAddrBus]   mem_rd_addr,
+    input   wire                mem_rd_e,
 
-    output reg [`RegLen - 1 : 0] wb_rd_data,
-    output reg [`RegAddrLen - 1 : 0] wb_rd_addr,
-    output reg wb_rd_enable
-    );
+    output  reg[`RegBus]        wb_rd_data,
+    output  reg[`RegAddrBus]    wb_rd_addr,
+    output  reg                 wb_rd_e,
+
+    input   wire[`StallBus]     stall
+);
 
 always @ (posedge clk) begin
-    if (rst == `ResetEnable) begin
-        wb_rd_data <= `ZERO_WORD;
-        wb_rd_addr <= `RegAddrLen'h0;
-        wb_rd_enable <= `WriteDisable;
-    end
-    else begin
-        wb_rd_data <= mem_rd_data;
+    if (rst || (stall[4] == 1 && stall[5] == 0)) begin
+        wb_rd_addr <= 0;
+        wb_rd_data <= 0;
+        wb_rd_e <= 0;
+    end else if (rdy && stall[4] == 0) begin
         wb_rd_addr <= mem_rd_addr;
-        wb_rd_enable <= mem_rd_enable;
+        wb_rd_data <= mem_rd_data;
+        wb_rd_e <= mem_rd_e;
     end
 end
-endmodule
+
+endmodule // mem_wb

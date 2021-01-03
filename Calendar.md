@@ -17,5 +17,8 @@
 + Begin to write.
 
 12.18 
-+ About trail reset, referring to https://zhuanlan.zhihu.com/p/312951091 
++ About trail reset, referring to https://zhuanlan.zhihu.com/p/312951091
+
+1.2 
++ Almost complete 
     

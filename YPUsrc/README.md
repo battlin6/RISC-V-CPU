@@ -22,7 +22,7 @@ endmodule
 
 Now let's begin: 
 
-##### IF(pc_reg)
+##### IF(pdc_reg)
 
 This part sends the PC value to rom and enable the whole chip. Since we do not have any jump instruction, we can simply add 4 each cycle if not reset. 
 
