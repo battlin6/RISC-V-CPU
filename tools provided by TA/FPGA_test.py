@@ -4,7 +4,7 @@ import sys
 isWin = sys.platform[:3] == 'win'
 wslPrefix = 'ubuntu.exe run ' if isWin else 'sudo '
 
-test_cases_dir = './testcase'
+test_cases_dir = '../testcase'
 path_of_bit = '~/Documents/verilog_file/MS108-2020-master/toy_CPU/toy_CPU/BTB_true(maybe).bit' # A Windows-style path is ok if you runs on Windows
 excluded_test_cases = []
 
