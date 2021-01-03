@@ -1,4 +1,8 @@
 `include "config.v"
+`define PREDSize     128
+`define PREDSizeLen  7
+`define PREDBus      127 : 0
+`define PREDEntryBus 8 : 2
 
 module predictor(
     input   wire    clk,
@@ -15,12 +19,6 @@ module predictor(
     output  wire                jmp_e,
     output  wire[`InstAddrBus]  pred
 );
-
-
-`define PREDSize     128
-`define PREDSizeLen  7
-`define PREDBus      127 : 0
-`define PREDEntryBus 8 : 2
 reg[4 : 0]  tag[`PREDBus];
 reg[12 : 0] target[`PREDBus];
 reg[1 : 0]  valid[`PREDBus];
@@ -39,12 +37,15 @@ always @ (posedge clk) begin
             valid[i] <= 2'b01;
         end
     end
-    else if (rdy && jmp_r && change_e) begin // is a branch && token
+    else if (rdy && jmp_r && change_e) begin // taken
+
         tag[addr_r[`PREDEntryBus]] <= addr_r[13 : 9];
         target[addr_r[`PREDEntryBus]] <= target_addr[12 : 0];
         if (valid[addr_r[`PREDEntryBus]] != 2'b11)
             valid[addr_r[`PREDEntryBus]] <= valid[addr_r[`PREDEntryBus]] + 1;
-    end if (rdy && jmp_r && (!change_e)) begin //is a branch && nottoken
+
+    end if (rdy && jmp_r && (!change_e)) begin //not taken
+
         tag[addr_r[`PREDEntryBus]] <= addr_r[13 : 9];
         target[addr_r[`PREDEntryBus]] <= target_addr[12 : 0];
         if (valid[addr_r[`PREDEntryBus]] != 2'b00)
@@ -52,4 +53,4 @@ always @ (posedge clk) begin
     end
 end
 
-endmodule // predictor
+endmodule

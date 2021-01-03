@@ -95,12 +95,12 @@ initial begin
   //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\array_test2\\test.data", ram);
   //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\bulgarian\\test.data", ram);
     //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\basicopt1\\test.data", ram);
-   $readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\expr\\test.data", ram);
+   //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\expr\\test.data", ram);
   //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\hanoi\\test.data", ram);
 //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\heart\\test.data", ram);
 //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\multiarray\\test.data", ram);
 //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\lvalue2\\test.data", ram);
-//$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\magic\\test.data", ram);
+$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\magic\\test.data", ram);
 //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\manyarguments\\test.data", ram);
 //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\pi\\test.data", ram);
 //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\qsort\\test.data", ram);
