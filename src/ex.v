@@ -1,5 +1,5 @@
 `timescale 1ns / 1ps
-`include "defines.v"
+`include "config.v"
 
 module ex(
     input   wire        rst,

@@ -1,4 +1,4 @@
-`include "defines.v"
+`include "config.v"
 
 module ex_mem (
     input   wire        clk,

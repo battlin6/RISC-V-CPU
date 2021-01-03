@@ -1,6 +1,6 @@
 // RISCV32I CPU top module
 // port modification allowed for debugging purposes
-`include "defines.v"
+`include "config.v"
 module cpu(
     input  wire                 clk_in,			// system clock signal
     input  wire                 rst_in,			// reset signal
@@ -102,7 +102,7 @@ wire[`DataBus]      data_mem_i, data_mem_o;
 wire[1 : 0]         status_if, status_mem;
 wire[2 : 0]         mem_times;
 
-//StallCtrl
+//Ctrl
 wire[`StallBus]     stall;
 wire                if_stall_req, mem_stall_req;
 // wire                stall_req;
@@ -232,7 +232,7 @@ mem_wb mem_wb0(
     .stall(stall)
 );
 
-stall_ctrl stall_ctrl0(
+stall_ctrl ctrl0(
     .clk(clk_in), .rst(rst_in), .rdy(rdy_in),
     .if_stall_req(if_stall_req), .mem_stall_req(mem_stall_req),
     .stall(stall),

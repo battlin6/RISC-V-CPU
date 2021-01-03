@@ -1,4 +1,4 @@
-`include "defines.v"
+`include "config.v"
 
 module stall_ctrl(
     input   wire    rst,
@@ -19,13 +19,17 @@ module stall_ctrl(
 always @(*) begin
     if (rst) begin
         stall = 6'b000000;
-    end else if (!rdy) begin
+    end
+    else if (!rdy) begin
         stall = 6'b111111;
-    end else if (mem_stall_req) begin
+    end
+    else if (mem_stall_req) begin
         stall = 6'b011111;
-    end else if (if_stall_req) begin
+    end
+    else if (if_stall_req) begin
         stall = 6'b000011;        
-    end else begin
+    end
+    else begin
         stall = 6'b000000;
     end
 end
@@ -57,4 +61,4 @@ always @ (*) begin
     end
 end
 
-endmodule // stall_ctrl
+endmodule // ctrl

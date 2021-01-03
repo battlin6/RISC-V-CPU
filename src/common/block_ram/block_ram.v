@@ -91,11 +91,11 @@ initial begin
     ram[i] = 0;
   end
    
-  $readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\gcd\\test.data", ram); // add test.data to vivado project or specify a valid file path
+  //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\gcd\\test.data", ram); // add test.data to vivado project or specify a valid file path
   //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\array_test2\\test.data", ram);
   //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\bulgarian\\test.data", ram);
     //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\basicopt1\\test.data", ram);
-   //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\expr\\test.data", ram);
+   $readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\expr\\test.data", ram);
   //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\hanoi\\test.data", ram);
 //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\heart\\test.data", ram);
 //$readmemh("D:\\Project\\Clion Project\\RISC-V-CPU\\testcase\\multiarray\\test.data", ram);

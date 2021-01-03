@@ -1,4 +1,4 @@
-`include "defines.v"
+`include "config.v"
 
 module mem_ctrl(
     input   wire        rst,
@@ -29,20 +29,20 @@ module mem_ctrl(
     output  reg[`MemAddrBus]    addr_to_out
 );
 
-reg c_work[1 : 0];
-wire c_valid[1 : 0], c_hit[1 : 0];
-wire[`InstBus]  c_data[1 : 0];
+reg cache_work[1 : 0];
+wire cache_valid[1 : 0], cache_hit[1 : 0];
+wire[`InstBus]  cache_data[1 : 0];
 
 cache cache0(
     .clk(clk),
     .rst(rst),
     .rdy(rdy),
     .addr(pc),
-    .work(c_work[0]),
+    .work(cache_work[0]),
     .data_i(data_mem_o),
-    .data_o(c_data[0]),
-    .isValid(c_valid[0]),
-    .isHit(c_hit[0])
+    .data_o(cache_data[0]),
+    .isValid(cache_valid[0]),
+    .isHit(cache_hit[0])
 );
 
 cache cache1(
@@ -50,15 +50,15 @@ cache cache1(
     .rst(rst),
     .rdy(rdy),
     .addr(pc),
-    .work(c_work[1]),
+    .work(cache_work[1]),
     .data_i(data_mem_o),
-    .data_o(c_data[1]),
-    .isValid(c_valid[1]),
-    .isHit(c_hit[1])
+    .data_o(cache_data[1]),
+    .isValid(cache_valid[1]),
+    .isHit(cache_hit[1])
 );
 
-assign cacheVal = c_hit[0] ? c_data[0] : c_data[1];
-assign cacheHit = c_hit[0] || c_hit[1];
+assign cacheVal = cache_hit[0] ? cache_data[0] : cache_data[1];
+assign cacheHit = cache_hit[0] || cache_hit[1];
 
 reg[2 : 0] times;
 reg[3 : 0] cnt;
@@ -70,8 +70,8 @@ always @ (posedge clk) begin
         status_if <= 0;
         status_mem <= 0;
         wr_out <= 0;
-        c_work[0] <= 0;
-        c_work[1] <= 0;
+        cache_work[0] <= 0;
+        cache_work[1] <= 0;
         times <= 0;
         cnt <= 0;
     end else if (rdy) begin
@@ -83,8 +83,8 @@ always @ (posedge clk) begin
                 status_if <= `INIT;
                 wr_out <= 0;
                 addr_to_out <= 0;
-                c_work[0] <= 0;
-                c_work[1] <= 0;
+                cache_work[0] <= 0;
+                cache_work[1] <= 0;
                 if (rw_mem != 2'b00) begin
                     wr_out <= (rw_mem == 2'b10);
                     addr_to_out <= addr_mem;
@@ -126,10 +126,10 @@ always @ (posedge clk) begin
 
                     if (status_if == `WORKING) begin
                         status_if <= `DONE;
-                        if (!c_valid[0])
-                            c_work[0] <= 1;
+                        if (!cache_valid[0])
+                            cache_work[0] <= 1;
                         else
-                            c_work[1] <= 1;
+                            cache_work[1] <= 1;
                     end else begin
                         status_mem <= `DONE;
                     end

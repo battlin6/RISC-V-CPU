@@ -1,4 +1,4 @@
-`include "defines.v"
+`include "config.v"
 
 module if_stage(
     input   wire        rst,
@@ -37,7 +37,7 @@ reg[`InstBus] _inst;
 reg _rw;
 
 wire    is_load;
-assign is_load = (_inst[6 : 0] == 7'b0000011);
+assign is_load = (_inst[6 : 0] == 7'b0000011);  //conversed pc
 
 always @ (posedge clk) begin
     if (rdy) begin

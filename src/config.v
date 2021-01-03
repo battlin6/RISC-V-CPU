@@ -1,5 +1,5 @@
-`ifndef DEFINES_V
-`define DEFINES_V
+`ifndef config_V
+`define config_V
 
 `define RstEnable       1'b1
 `define RstDisable      1'b0
@@ -49,6 +49,49 @@
 `define AluOpBus        7 : 0
 `define AluSelBus       2 : 0
 
+// ALUSel
+`define EXE_RES_NOP			3'b000
+`define EXE_RES_ARITH		3'b001
+`define EXE_RES_LUI			3'b010
+`define EXE_RES_AUIPC		3'b011
+`define EXE_RES_BRANCH		3'b100
+`define EXE_RES_LOAD		3'b101
+`define EXE_RES_STORE		3'b110
+`define EXE_RES_JAL			3'b111
+// ALUop
+`define NOP    5'b00000
+`define LUI    5'b00001
+`define AUIPC  5'b00010
+`define JAL    5'b00011
+`define JALR   5'b00100
+`define BEQ    5'b00101
+`define BNE    5'b00110
+`define BLT    5'b00111
+`define BGE    5'b01000
+`define BLTU   5'b01001
+`define BGEU   5'b01010
+`define LB     5'b01011
+`define LH     5'b01100
+`define LW     5'b01101
+`define LBU    5'b01110
+`define LHU    5'b01111
+`define SB     5'b10000
+`define SW     5'b10001
+`define SH     5'b10010
+`define ADD    5'b10011
+`define SUB    5'b10100
+`define SLL    5'b10101
+`define SLT    5'b10110
+`define SLTU   5'b10111
+`define XOR    5'b11000
+`define SRL    5'b11001
+`define SRA    5'b11010
+`define OR     5'b11011
+`define AND    5'b11100
+`define ADD2   5'b11101
+`define FLUSH  5'b11111
+
+
 `define OpWidth         7
 `define Op2Width        3
 `define Op3Width        7
@@ -84,9 +127,7 @@
 `define OP_LOAD			7'b0000011
 `define OP_STORE		7'b0100011
 
-/*
-  	Instruction funct3
-*/
+//funct3
 
 // OP_IMM
 `define FUNCT3_ADDI			3'b000
@@ -128,71 +169,14 @@
 `define FUNCT3_SH		3'b001
 `define FUNCT3_SW		3'b010
 
-/*
-	Instruction funct7
-*/
-
-// ADD_SUB
+//funct7
 `define FUNCT7_ADD		7'b0000000
 `define FUNCT7_SUB		7'b0100000
-
-// SRLI_SRAI
 `define FUNCT7_SRLI		7'b0000000
 `define FUNCT7_SRAI		7'b0100000
-
-// SRL_SRA
 `define FUNCT7_SRL		7'b0000000
 `define FUNCT7_SRA		7'b0100000
-
-
 `define FlushInst 		32'h00000001
 `define Flushed 		7'b0000001
-
-/*
-	AluSel
-*/
-`define EXE_RES_NOP			3'b000
-`define EXE_RES_ARITH		3'b001
-`define EXE_RES_LUI			3'b010
-`define EXE_RES_AUIPC		3'b011
-`define EXE_RES_BRANCH		3'b100
-`define EXE_RES_LOAD		3'b101
-`define EXE_RES_STORE		3'b110
-`define EXE_RES_JAL			3'b111
-
-/*
-	AluOp
-*/
-`define NOP    5'b00000
-`define LUI    5'b00001
-`define AUIPC  5'b00010
-`define JAL    5'b00011
-`define JALR   5'b00100
-`define BEQ    5'b00101 
-`define BNE    5'b00110     
-`define BLT    5'b00111     
-`define BGE    5'b01000     
-`define BLTU   5'b01001     
-`define BGEU   5'b01010     
-`define LB     5'b01011    
-`define LH     5'b01100    
-`define LW     5'b01101    
-`define LBU    5'b01110    
-`define LHU    5'b01111    
-`define SB     5'b10000    
-`define SW     5'b10001    
-`define SH     5'b10010    
-`define ADD    5'b10011
-`define SUB    5'b10100   
-`define SLL    5'b10101   
-`define SLT    5'b10110   
-`define SLTU   5'b10111    
-`define XOR    5'b11000
-`define SRL    5'b11001
-`define SRA    5'b11010   
-`define OR     5'b11011   
-`define AND    5'b11100
-`define ADD2   5'b11101
-`define FLUSH  5'b11111
 
 `endif
