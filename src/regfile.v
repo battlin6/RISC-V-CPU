@@ -18,10 +18,10 @@ module regfile(
     output  reg[`RegBus]        rdata2
 );
 
-reg[`RegBus]    regs[`RegNum-1 : 0];
+
 
 integer i;
-
+reg[`RegBus]    regs[`RegNum-1 : 0];
 always @ (posedge clk) begin
     if (rst) begin
         for (i = 0; i < `RegNum; i=i+1) regs[i] <= 0;
@@ -45,6 +45,10 @@ always @ (*) begin
         rdata1 = 0;
     end
 end
+
+
+
+
 always @ (*) begin
     if (!rst && re2) begin
         if (raddr2 == 0) begin
@@ -52,12 +56,14 @@ always @ (*) begin
         end
         else if (we && raddr2 == waddr) begin
             rdata2 = wdata;
-        end else begin
+        end
+        else begin
             rdata2 = regs[raddr2];
         end
-    end else begin
+    end
+    else begin
         rdata2 = 0;
     end
 end
 
-endmodule // regfile
+endmodule

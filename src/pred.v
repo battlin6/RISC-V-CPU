@@ -36,7 +36,7 @@ integer i;
 always @ (posedge clk) begin
     if (rst) begin
         for (i = 0; i < `PREDSize; i=i+1) begin
-            valid[i] <= 2'b10;
+            valid[i] <= 2'b01;
         end
     end
     else if (rdy && jmp_r && change_e) begin // is a branch && token
